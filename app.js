@@ -13,6 +13,8 @@ const app = express()
 var items = [];
 var item = "";
 var workItems = [];
+var workProjects = ["Finish todo list project", "Complete chapter 24"];
+var groceries = [];
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,43 +31,47 @@ let day = date.getDate();
 
 
 
-//this sends post request when submitting form
-app.post("/", function(req, res){
-  item = req.body.newItem;
-  if (req.body.list === "Work" ){
-   workItems.push(item)
-   res.redirect("/work")
- } else {
-   items.push(item);
-   res.redirect("/");
- }
 
-});
-
-app.get("/work", function(req, res){
-
-  res.render("list",  {listTitle: "Work list", newListItems: workItems})
+//this list WORKS
+app.get("/daily-tasks", function(req, res){
+  res.render("daily-tasks",  {listTitle: "Daily Tasks", newListItems: workItems})
 })
 
 
-app.post("/work", function(req, res) {
+app.post("/daily-tasks", function(req, res) {
   let item = req.body.newItem;
   workItems.push(item);
-
+  res.redirect("/daily-tasks");
 });
 
-app.get("/daily-tasks", function(req, res){
-  res.render("daily-tasks")
-})
 
+
+//work projects
 app.get("/work-projects", function(req, res){
-  res.render("work-projects")
+  res.render("work-projects", {listIdWork: "Work Projects", newListItems: workProjects})
 })
 
+app.post("/work-projects", function(req, res) {
+  let item = req.body.newItem;
+  workProjects.push(item);
+  res.redirect("/work-projects");
+});
+
+
+//groceries
 app.get("/groceries", function(req, res){
-  res.render("groceries")
+  res.render("groceries", {listIdGroceries: "Groceries", newListItems: groceries})
 })
 
+app.post("/groceries", function(req, res) {
+  let item = req.body.newItem;
+  groceries.push(item);
+  res.redirect("/groceries");
+});
+
+
+
+//about
 app.get("/about", function(req, res){
   res.render("about")
 })

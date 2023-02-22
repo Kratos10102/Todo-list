@@ -6,21 +6,25 @@
 <div class="box" id="heading"> <h1> <%= listTitle %> </h1> </div>
 
 <!-- list -->
-<div class="box">
-    <% for(let i = 0; i < newListItems.length; i++) { %>
-  <div class="item">
-    <input type="checkbox">
-    <p><%= newListItems[i] %></p>
-  </div>
+<div class="homeRouteBox">
+      <a href="/daily-tasks" class="homePageLink">
+        <div class="itemHomeRoute">
+          Daily Tasks
+        </div>
+      </a>
+      <a href="/work-projects" class="homePageLink">
+        <div class="itemHomeRoute">
+          Work Projects
+        </div>
+      </a>
+      <a href="/groceries" class="homePageLink">
+        <div class="itemHomeRoute">
+          Groceries
+        </div>
+      </a>
+    </div>
 
-          <% } %>
-
-  <form action="/" method="post">
-    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-    <button type="submit" name="list" value=<%= listTitle %>>+</button>
-  </form>
-</div>
-
+    <!-- res.render("list", {listTitle: todayDate, newListItems: items}); -->
 
 
 
